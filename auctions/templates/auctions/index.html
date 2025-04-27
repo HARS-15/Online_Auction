@@ -1,0 +1,92 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% load auction_extras %}
+
+{% block watchlist %}
+    <a class="nav-link" href="{% url 'view_watchlist' %}">Favorites
+        <span class="badge text-bg-secondary">{{ watchlist_count }}</span>
+    </a>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid carousel-wrapper">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="card-wrapper container-fluid d-flex justify-content-evenly">
+                        {% for three_listings in listings %}
+                            {% if forloop.first %}
+                                {% for listing in three_listings%}
+                                    <div class="card card-index" style="width: 18rem;">
+                                        {% if listing.image_url %}
+                                            <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
+                                        {% else %}
+                                            <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
+                                        {% endif %}                
+                                        <div class="card-body listing-card-body">
+                                            <h5 class="card-title">{{ listing.title }}</h5>
+                                            <h6 class="card-text">current Price: ₹{{ current_price|get_item:listing.id|floatformat:2 }}</h6>
+                                            <a href="{% url 'bid' listing.id %}" class="btn carousel-btn">Bid</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            {% empty %}
+                            <div class="card card-index" style="width: 18rem;">
+                                <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">               
+                                <div class="card-body listing-card-body">
+                                    <h5 class="card-title">No Products are in Auction</h5>
+                                </div>
+                            </div>
+                       {% endfor %}
+                    </div>
+                </div>
+                {% for three_listings in listings %}
+                    {% if not forloop.first %}    
+                        <div class="carousel-item">
+                            <div class="card-wrapper container-fluid d-flex justify-content-evenly">
+                                {% for listing in three_listings%}
+                                    <div class="card card-index-item" style="width: 18rem;">
+                                        {% if listing.image_url %}
+                                            <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
+                                        {% else %}
+                                            <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
+                                        {% endif %}                
+                                        <div class="card-body listing-card-body">
+                                            <h5 class="card-title">{{ listing.title }}</h5>
+                                            <h6 class="card-text">current Price: ${{ current_price|get_item:listing.id|floatformat:2 }} </h6>
+                                        </div>
+                                        <div class="card-body listing-card-body">    
+                                            <a href="{% url 'bid' listing.id %}" class="btn carousel-btn">Bid</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% empty %}
+                    <div class="carousel-item">
+                        <div class="card-wrapper container-fluid d-flex justify-content-evenly">
+                            <div class="card card-index-item" style="width: 18rem;">
+                                <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">               
+                                <div class="card-body listing-card-body">
+                                    <h5 class="card-title">No Products are in Auction</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}
