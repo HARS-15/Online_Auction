@@ -1,38 +1,61 @@
 {% extends "auctions/layout.html" %}
-
 {% load static %}
 
 {% block body %}
-    <div class="login-wrapper">
-        <div class="login-header">
-            <h2>Login</h2>
-        </div>
-
-        {% if message %}
-            <div class="login-error">{{ message }}</div>
-        {% endif %}
-
-        <form class="login-form" action="{% url 'login' %}" method="post">
-            {% csrf_token %}
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="addon-wrapping">
-                    <img src="{% static 'auctions/icons8-username-50.png' %}" width="25px" height="25px">
-                </span>
-                <input autofocus type="text" class="form-control" name="username" placeholder="Username" aria-describedby="addon-wrapping">
-            </div>
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="addon-wrapping">
-                    <img src="{% static 'auctions/icons8-password-50.png' %}" width="25px" height="25px">
-                </span>
-                <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="addon-wrapping">
-            </div>
-            <div class="form-btn login-btn-container">
-                <input class="btn login-btn" type="submit" value="Login">
-            </div>
-        </form>
-
-        <div class="create-account">
-            <span>Don't have an account? </span><a href="{% url 'register' %}">Sign Up here.</a>
-        </div>
+<div class="login-wrapper">
+    <div class="login-header">
+        <h2>Login</h2>
     </div>
+
+    {% if message %}
+        <div class="login-error">{{ message }}</div>
+    {% endif %}
+
+    <form class="login-form" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">
+                <img src="{% static 'auctions/icons8-username-50.png' %}" width="25px" height="25px">
+            </span>
+            <input autofocus type="text" class="form-control" name="username" placeholder="Username" aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">
+                <img src="{% static 'auctions/icons8-password-50.png' %}" width="25px" height="25px">
+            </span>
+            <input type="password" class="form-control" name="password" placeholder="Password" aria-describedby="addon-wrapping">
+        </div>
+
+
+        <div class="form-check mt-2" style="color:aliceblue;">
+            <input class="form-check-input" type="checkbox" id="jntukCheck">
+            <label class="form-check-label" for="jntukCheck">
+                I belong to JNTUK
+            </label>
+        </div>
+
+        <div id="regNumberField" class="input-group flex-nowrap mt-2" style="display: none;">
+            <span class="input-group-text" id="addon-wrapping">
+                <img src="{% static 'auctions/icons8-id-verified-48.png' %}" width="25px" height="25px">
+            </span>
+            <input type="text" class="form-control" name="reg_number" placeholder="Enter Roll Number (Reg No.)" aria-describedby="addon-wrapping">
+        </div>
+
+        <div class="form-btn login-btn-container mt-2">
+            <input class="btn login-btn" type="submit" value="Login">
+        </div>
+    </form>
+
+    <div class="create-account mt-3">
+        <span>Don't have an account? </span><a href="{% url 'register' %}">Sign Up here.</a>
+    </div>
+</div>
+
+<!-- JavaScript to toggle field -->
+<script>
+    document.getElementById('jntukCheck').addEventListener('change', function () {
+        const regField = document.getElementById('regNumberField');
+        regField.style.display = this.checked ? 'flex' : 'none';
+    });
+</script>
 {% endblock %}

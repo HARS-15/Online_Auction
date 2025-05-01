@@ -1,5 +1,5 @@
 from django import forms
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator,MaxValueValidator
 
 
 class CreateListingForm(forms.Form):
@@ -23,7 +23,8 @@ class CreateListingForm(forms.Form):
         ("Home", "Home"),
         ("Antiques", "Antiques"),
         ('Jewellery','Jewellery'),
-        ('Paintings','Paintings')
+        ('Paintings','Paintings'),
+        ('Books','Books'),
     ]
 
     category = forms.ChoiceField(
@@ -64,6 +65,18 @@ class CreateListingForm(forms.Form):
         widget=forms.URLInput(
             attrs={
                 "placeholder": "Image URL",
+                "class": "form-control",
+                "aria-describedby": "basic-addon1",
+            }
+        ),
+    )
+    discount = forms.IntegerField(
+        label="",
+        required=False,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        widget=forms.NumberInput(
+            attrs={
+                "placeholder": "Discount (%)",
                 "class": "form-control",
                 "aria-describedby": "basic-addon1",
             }

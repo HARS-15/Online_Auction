@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.db.models import Max, Count
 from .utils import get_current_price
+import re
 
 from .models import *
 from .forms import *
@@ -36,18 +37,24 @@ def login_view(request):
         # Attempt to sign user in
         username = request.POST["username"]
         password = request.POST["password"]
+        reg_number=request.POST['reg_number']
         user = authenticate(request, username=username, password=password)
 
         # Check if authentication successful
         if user is not None:
+            # Match JNTUK roll number pattern
+            pattern = r'^\d{5}A\d{4}$'
+            user.is_JNTUK = bool(re.match(pattern, reg_number))
+            user.save()
             login(request, user)
-            if "next" in request.session and request.session["next"] != None:
+            if "next" in request.session and request.session["next"] is not None:
                 next_url = request.session["next"]
             else:
                 next_url = request.POST.get("next", reverse("index"))
             return HttpResponseRedirect(next_url)
+
         else:
-            if "next" not in request.session and request.POST.get("next") != None:
+            if "next" not in request.session and request.POST.get("next") is not None:
                 request.session["next"] = request.POST.get("next")
             return render(
                 request,
@@ -61,8 +68,13 @@ def login_view(request):
 
 
 def logout_view(request):
+    user = request.user
+    if user.is_authenticated:
+        user.is_JNTUK = False
+        user.save()
     logout(request)
     return HttpResponseRedirect(reverse("index"))
+
 
 
 def register(request):
@@ -111,6 +123,7 @@ def create_listing(request):
             starting_bid = form.cleaned_data["starting_bid"]
             image_url = form.cleaned_data["image_url"]
             category = form.cleaned_data["category"]
+            discount=form.cleaned_data['discount']
             listed_by = request.POST.get("listed_by")
             listing = AuctionListing(
                 title=title,
@@ -119,6 +132,7 @@ def create_listing(request):
                 image_url=image_url,
                 category=category,
                 listed_by=User.objects.get(username=listed_by),
+                spl_dis=discount,
             )
             listing.save()
             return HttpResponseRedirect(reverse("bid", args=[listing.id]))

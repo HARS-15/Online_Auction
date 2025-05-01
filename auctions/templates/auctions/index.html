@@ -9,8 +9,27 @@
         <span class="badge text-bg-secondary">{{ watchlist_count }}</span>
     </a>
 {% endblock %}
-
 {% block body %}
+    {% if user.is_authenticated and user.is_JNTUK %}
+    <div class="container my-4 p-4 border rounded bg-light shadow-sm">
+        <div class="row align-items-center">
+            <div class="col-md-3 text-center mb-3 mb-md-0">
+                <img src="{% static 'auctions/JNTUK_logo.jpeg' %}" alt="JNTUK Logo" class="img-fluid" style="max-height: 150px;">
+            </div>
+            <div class="col-md-9">
+                <h4>Welcome to the Auction Platform, <strong>{{ user.username | upper }}</strong>!</h4>
+                <p class="text-success fw-semibold">✅ Verified JNTUK Student</p>
+                <p class="text-muted mb-1">As a JNTUK student, you enjoy exclusive benefits:</p>
+                <ul class="mb-0">
+                    <li>✔ Early access to exclusive listings</li>
+                    <li>✔ Discounted entry bids on select auctions</li>
+                    <li>✔ Priority support and promotions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="container-fluid carousel-wrapper">
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -26,7 +45,7 @@
                                             <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                         {% endif %}                
                                         <div class="card-body listing-card-body">
-                                            <h5 class="card-title">{{ listing.title }}</h5>
+                                            <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                             <h6 class="card-text">current Price: ₹{{ current_price|get_item:listing.id|floatformat:2 }}</h6>
                                             <a href="{% url 'bid' listing.id %}" class="btn carousel-btn">Bid</a>
                                         </div>
@@ -55,7 +74,7 @@
                                             <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                         {% endif %}                
                                         <div class="card-body listing-card-body">
-                                            <h5 class="card-title">{{ listing.title }}</h5>
+                                            <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                             <h6 class="card-text">current Price: ${{ current_price|get_item:listing.id|floatformat:2 }} </h6>
                                         </div>
                                         <div class="card-body listing-card-body">    

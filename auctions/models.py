@@ -14,12 +14,14 @@ class AuctionListing(models.Model):
         "User", on_delete=models.CASCADE, related_name="listings"
     )
     created_at = models.DateTimeField(auto_now_add=True)
+    spl_dis=models.IntegerField(default=2)
 
 
 class User(AbstractUser):
     watchlist = models.ManyToManyField(
         AuctionListing, blank=True, related_name="watchers"
     )
+    is_JNTUK=models.BooleanField(default=False)
 
 
 class Bid(models.Model):

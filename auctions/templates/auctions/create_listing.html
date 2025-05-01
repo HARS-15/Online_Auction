@@ -32,6 +32,10 @@
                 {{ form.category }}
             </div>
             <div class="input-group">
+                <label class="input-group-text" for="inputGroupSelect01">Special Discount</label>
+                {{ form.discount}}
+            </div>
+            <div class="input-group">
                 <span class="input-group-text">Description</span>
                 {{ form.discription }}
             </div>
@@ -67,7 +71,7 @@
                                         <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                     {% endif %}                
                                     <div class="card-body listing-card-body">
-                                        <h5 class="card-title">{{ listing.title }}</h5>
+                                        <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                         <h6 class="card-text">Current Price: ₹{{ current_price|get_item:listing.id|floatformat:2 }}</h6>
                                         <a href="{% url 'bid' listing.id %}" class="btn carousel-btn">Bid</a>
                                     </div>
@@ -116,7 +120,7 @@
                                         <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                     {% endif %}                
                                     <div class="card-body listing-card-body">
-                                        <h5 class="card-title">{{ listing.title }}</h5>
+                                        <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                         <h6 class="card-text">Current Price: ₹{{ bidded_price|get_item:listing.id|floatformat:2 }}</h6>
                                         <a href="{% url 'bid' listing.id %}" class="btn carousel-btn">Bid</a>
                                     </div>

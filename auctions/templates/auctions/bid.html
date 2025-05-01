@@ -38,7 +38,7 @@
                                 <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top">
                             {% endif %}
                             <div class="card-body listing-card-body">
-                                <h3 class="card-title" style="font-weight:700;">{{ listing.title }}&nbsp;</h3>
+                                <h3 class="card-title" style="font-weight:700;">{{ listing.title | lower |capfirst }}&nbsp;</h3>
                                 <p class="card-text">{{ listing.discription }}</p>
                                 <p class="card-text"><small class="text-body-secondary" style="color: #EEF0E5 !important;">Last updated: {{latest_bid_time}}</small></p>
                             </div>
@@ -88,6 +88,9 @@
                             <li class="list-group-item">Listed by: {{ listing.listed_by }}</li>
                             <li class="list-group-item">Category: {{ listing.category }}</li>
                             <li class="list-group-item">Opening Bid: ₹ {{ listing.starting_bid }}.00</li>
+                            {% if user.is_JNTUK %}
+                                <li class="list-group-item">Special Discount: ₹ {{ listing.spl_dis }}%</li>
+                            {% endif %}
                             <li class="list-group-item">Created at: {{ listing.created_at}}</li>
                         </ul>
                     </div>
@@ -100,10 +103,13 @@
                 <div class="row comments-row">
                     <div class="col-md-12 comments">
                         {% for bid in all_bids %}
-                        <div class="justify-content-between align-items-center mb-2 comment-wrapper">
-                            <h5 class="mb-0  fw-bold">{{ bid.bidder|upper }}</h5><br>
-                            <span class="mb-0 ">Bid Price : ₹ {{ bid.current_bid }}.00</span>
-                        </div>
+                            <div class="justify-content-between align-items-center mb-2 comment-wrapper position-relative">
+                                <h5 class="mb-0 fw-bold">{{ bid.bidder|upper }}</h5><br>
+                                <span class="mb-0">Bid Price : ₹ {{ bid.current_bid }}.00</span>
+                                <span class="position-absolute bottom-0 end-0">
+                                    {{ bid.bid_time  }}
+                                </span>
+                            </div>
                         {% empty %}
                             <div class="comment-wrapper">
                                 <h5>Item has no bidds till now.</h5> 
