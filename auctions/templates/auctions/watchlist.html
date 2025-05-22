@@ -23,13 +23,13 @@
                             <img src="{{ item.image_url }}"  class="img-fluid rounded-start" style="height: 100%; width:100%;">
                         {% else %}
                             <img src="{% static 'auctions/auction_logo.png' %}"  class="img-fluid rounded-start" alt="...">
-                        {% endif %}                    
+                        {% endif %}
                     </div>
                     <div class="col-md-8 listing-card-body">
                         <div class="card-body listing-card-body">
                             <h5 class="card-title">{{ item.title | lower |capfirst}}</h5>
                             <p class="card-text" style="font-weight:700"> category: {{ item.category }}</p>
-                            <p class="card-text" style="font-weight:700">Current price: ${{ current_price|get_item:item.id|floatformat:2 }}</p>
+                            <p class="card-text" style="font-weight:700">Current price: ₹{{ current_price|get_item:item.id|floatformat:2 }}</p>
                             <p class="card-text"><small style="font-weight:700">created: {{ item.created_at}}</small></p>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
             <div class="card watchlist-result-card mb-3" onclick="location.href='{% url 'index' %}';">
                 <div class ="row g-0">
                     <div class="col-md-4" style="max-height: 40vh">
-                        <img src="{% static 'auctions/auction_logo.png' %}"  class="img-fluid rounded-start" alt="...">                 
+                        <img src="{% static 'auctions/auction_logo.png' %}"  class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8 listing-card-body">
                         <div class="card-body listing-card-body">

@@ -43,7 +43,7 @@
                                             <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
                                         {% else %}
                                             <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
-                                        {% endif %}                
+                                        {% endif %}
                                         <div class="card-body listing-card-body">
                                             <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                             <h6 class="card-text">current Price: ₹{{ current_price|get_item:listing.id|floatformat:2 }}</h6>
@@ -54,7 +54,7 @@
                             {% endif %}
                             {% empty %}
                             <div class="card card-index" style="width: 18rem;">
-                                <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">               
+                                <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                 <div class="card-body listing-card-body">
                                     <h5 class="card-title">No Products are in Auction</h5>
                                 </div>
@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 {% for three_listings in listings %}
-                    {% if not forloop.first %}    
+                    {% if not forloop.first %}
                         <div class="carousel-item">
                             <div class="card-wrapper container-fluid d-flex justify-content-evenly">
                                 {% for listing in three_listings%}
@@ -72,12 +72,12 @@
                                             <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
                                         {% else %}
                                             <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
-                                        {% endif %}                
+                                        {% endif %}
                                         <div class="card-body listing-card-body">
                                             <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
-                                            <h6 class="card-text">current Price: ${{ current_price|get_item:listing.id|floatformat:2 }} </h6>
+                                            <h6 class="card-text">current Price: ₹{{ current_price|get_item:listing.id|floatformat:2 }} </h6>
                                         </div>
-                                        <div class="card-body listing-card-body">    
+                                        <div class="card-body listing-card-body">
                                             <a href="{% url 'bid' listing.id %}" class="btn carousel-btn">Bid</a>
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                     <div class="carousel-item">
                         <div class="card-wrapper container-fluid d-flex justify-content-evenly">
                             <div class="card card-index-item" style="width: 18rem;">
-                                <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">               
+                                <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                 <div class="card-body listing-card-body">
                                     <h5 class="card-title">No Products are in Auction</h5>
                                 </div>

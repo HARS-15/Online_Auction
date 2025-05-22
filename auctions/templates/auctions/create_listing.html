@@ -20,19 +20,19 @@
         <form class="create-listing-form" action={% url 'create' %} method="post">
             {% csrf_token %}
             <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">Name</span>    
+                <span class="input-group-text" id="basic-addon1">Name</span>
                 {{ form.title }}
             </div>
             <div class="input-group">
-                <span class="input-group-text" id="basic-addon1">Price</span>    
+                <span class="input-group-text" id="basic-addon1">Price</span>
                 {{ form.starting_bid }}
-            </div>           
+            </div>
             <div class="input-group">
                 <label class="input-group-text" for="inputGroupSelect01">Category</label>
                 {{ form.category }}
             </div>
             <div class="input-group">
-                <label class="input-group-text" for="inputGroupSelect01">Special Discount</label>
+                <label class="input-group-text" for="basic-addon1">Special Discount</label>
                 {{ form.discount}}
             </div>
             <div class="input-group">
@@ -69,7 +69,7 @@
                                         <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
                                     {% else %}
                                         <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
-                                    {% endif %}                
+                                    {% endif %}
                                     <div class="card-body listing-card-body">
                                         <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                         <h6 class="card-text">Current Price: ₹{{ current_price|get_item:listing.id|floatformat:2 }}</h6>
@@ -79,7 +79,7 @@
                             {% endfor %}
                             {% empty %}
                                 <div class="card card-index" style="width: 18rem;">
-                                    <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">               
+                                    <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                     <div class="card-body listing-card-body">
                                         <h5 class="card-title">No Products in Your Auction</h5>
                                     </div>
@@ -118,7 +118,7 @@
                                         <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
                                     {% else %}
                                         <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
-                                    {% endif %}                
+                                    {% endif %}
                                     <div class="card-body listing-card-body">
                                         <h5 class="card-title">{{ listing.title | lower |capfirst}}</h5>
                                         <h6 class="card-text">Current Price: ₹{{ bidded_price|get_item:listing.id|floatformat:2 }}</h6>
@@ -128,7 +128,7 @@
                             {% endfor %}
                             {% empty %}
                                 <div class="card card-index" style="width: 18rem;">
-                                    <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">               
+                                    <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top" alt="...">
                                     <div class="card-body listing-card-body">
                                         <h5 class="card-title">Not involed in any Bidding</h5>
                                     </div>

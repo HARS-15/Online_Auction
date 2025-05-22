@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6ps8j!crjgrxt34cqbqn7x&b3y%(fny8k8nh21+qa)%ws3fh!q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['OnlineAuctionFinalProject.pythonanywhere.com']
 
 
 # Application definition
@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'commerce.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'OnlineAuctionFin$Online_Auction',
+            'USER': 'OnlineAuctionFin',
+            'PASSWORD': 'Sample@123',
+            'HOST': 'OnlineAuctionFinalProject.mysql.pythonanywhere-services.com',
+            'PORT': '3306',
     }
 }
 
@@ -113,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -126,5 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'auctions/static')
+]
+STATIC_ROOT=os.path.join(BASE_DIR,'asserts')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

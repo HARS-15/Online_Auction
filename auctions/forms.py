@@ -72,9 +72,8 @@ class CreateListingForm(forms.Form):
     )
     discount = forms.IntegerField(
         label="",
-        required=False,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        widget=forms.NumberInput(
+        widget=forms.TextInput(
             attrs={
                 "placeholder": "Discount (%)",
                 "class": "form-control",

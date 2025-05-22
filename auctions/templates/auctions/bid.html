@@ -33,7 +33,7 @@
                             {% if listing.image_url %}
                                 <a href="{{ listing.image_url }}" target="_blank">
                                     <img src="{{ listing.image_url }}" class="card-img-top" alt="...">
-                                </a>   
+                                </a>
                             {% else %}
                                 <img src="{% static 'auctions/auction_logo.png' %}" class="card-img-top">
                             {% endif %}
@@ -85,7 +85,7 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="list-group item-details">
-                            <li class="list-group-item">Listed by: {{ listing.listed_by }}</li>
+                            <li class="list-group-item">Listed by: {{ listing.listed_by | upper}}</li>
                             <li class="list-group-item">Category: {{ listing.category }}</li>
                             <li class="list-group-item">Opening Bid: ₹ {{ listing.starting_bid }}.00</li>
                             {% if user.is_JNTUK %}
@@ -112,9 +112,9 @@
                             </div>
                         {% empty %}
                             <div class="comment-wrapper">
-                                <h5>Item has no bidds till now.</h5> 
+                                <h5>Item has no bidds till now.</h5>
                             </div>
-                        {% endfor %}   
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="bids_comments">
@@ -125,14 +125,14 @@
                         {% for comment in comments %}
                             <div class="comment-wrapper">
                                 <h5>{{ comment.author|upper }}&nbsp;</h5>
-                                <h6>{{ comment.comment_time }}</h6> 
+                                <h6>{{ comment.comment_time }}</h6>
                                 <span style="display:block;">{{ comment.comment }}</span>
                             </div>
                         {% empty %}
                             <div class="comment-wrapper">
-                                <h5>No comments.</h5> 
+                                <h5>No comments.</h5>
                             </div>
-                        {% endfor %}   
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="row">
@@ -164,7 +164,7 @@
                     {% if bidder_name == user.username %}
                         <p><img style="display: inline-block; float: left; margin-right: 8px;" src="{% static 'auctions/trophy-with-confetti.gif'%}">
                             Congratulations! You have won the auction. contact seller at <em>{{ seller_email }}</em></p>
-                    {% elif user.username|lower == listing.listed_by|lower  %} 
+                    {% elif user.username|lower == listing.listed_by|lower  %}
                         <p>You have closed the Auction. The winner is <em>{{ bidder_name }}</em>. contact winner at <em>{{winner_email}}</em></p>
                     {% else %}
                         <p>The Auction is closed. better luck next time!</p>
@@ -198,10 +198,10 @@
                 targets: ['#path1', '#path2', '#path3', '#path4'],
                 translateY: 10,
                 rotate: {
-                  value: '-50deg', 
+                  value: '-50deg',
                   easing: 'linear',
                 },
-                duration: 170, 
+                duration: 170,
                 complete: function(anim) {
                   // Animation to revert changes
                   anime({
@@ -227,7 +227,7 @@
             } else if ("False" === "{{watchlist}}"){
                 if(collection[i].textContent === "Remove"){
                     collection[i].style.display = "None";
-               } 
+               }
             } else {
                 break;
             }
